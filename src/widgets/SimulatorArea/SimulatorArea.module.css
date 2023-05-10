@@ -1,0 +1,59 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.head {
+  margin-top: 70px;
+  color: #CFE741;
+  font-size : 47px;
+  position: relative;
+  width: 1060px;
+}
+
+.head::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -26px;
+  height: 2px;
+  width: 1060px;
+  background-color: #CFE741;
+}
+
+.textContainer {
+  margin-top: 10px;
+  width: 1060px;
+  padding: 30px 60px;
+  font-size: 24px;
+  line-height: 44px;
+  background-color: #1E1E1E;
+  border: none;
+  min-height: 560px;
+}
+
+.textContainer:focus {
+  outline: none;
+}
+
+.initialSymbol {
+  background-color: none;
+}
+
+.currentSymbol {
+  background-color: #CFE741;
+  color: #030303;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.correctSymbol {
+  color: #CFE741;
+}
+
+.errorSymbol {
+  background-color: #6a13ce;
+  padding-left: 3px;
+  padding-right: 3px;
+}

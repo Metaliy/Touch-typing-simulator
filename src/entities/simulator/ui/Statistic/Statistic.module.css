@@ -1,0 +1,66 @@
+.root {
+  margin-top: 10px;
+  width: 1060px;
+  background-color: #1E1E1E;
+  height: 570px;
+  padding: 30px 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+.head {
+  font-size: 24px;
+  line-height: 38px;
+}
+
+.statisticContainer {
+  width: 100%;
+  height: 330px;
+  display: flex;
+}
+
+.statisticElementContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  margin: 20px auto;
+  width: 235px;
+}
+
+.statisticValue {
+  font-size: 50px;
+  line-height: 60px;
+  color : #CFE741;
+}
+
+.statisticValueDisabled {
+  line-height: 60px;
+  font-size: 50px;
+  color : #595959;
+}
+
+.statisticIcon {
+  margin-top: 40px;
+}
+
+.statisticName {
+  font-size: 22px;
+  margin-top: 40px;
+}
+
+.units {
+  font-size: 17px;
+  line-height: 14px;
+}
+
+.retryButton {
+  margin: auto auto 0 auto;
+  border: none;
+  background-color: #CFE741;
+  color: #030303;
+  width: 40%;
+  height: 68px;
+  font-size: 24px;
+  cursor: pointer;
+}
