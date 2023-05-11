@@ -1,5 +1,10 @@
 import { type RefObject, useEffect, useRef, useState } from 'react'
-import { SimulatorPreview, Statistic, TypedText } from '@/entities/simulator'
+import {
+  PausePopup,
+  SimulatorPreview,
+  Statistic,
+  TypedText,
+} from '@/entities/simulator'
 import { fetchTypedText } from '@/entities/simulator/api/typedTextApi'
 import { selectTypedText } from '@/entities/simulator/model/slice'
 import { SimulatorView } from '@/shared/lib/config'
@@ -20,27 +25,21 @@ export function SimulatorArea() {
   const [incorrectSymbolCount, setIncorrectSymbolCount] = useState(0)
   const [isInProgress, setIsInProgress] = useState(false)
   const [isFinished, setIsFinished] = useState(false)
+  const [isPause, setIsPause] = useState(false)
   const statisticRef = useRef<HTMLDivElement>(null)
   const simulatorRef = useRef<HTMLDivElement>(null)
 
   const { time, start, stop, reset } = useStopwatch()
 
-  const restartSimulator = () => {
-    reset()
-    setCorrectSymbolCount(0)
-    setWrongSymbolIndex(-1)
-    setCurrentView(SimulatorView.Instruction)
-    setIncorrectSymbolCount(0)
-    setIsInProgress(false)
-    setIsFinished(false)
-    dispatch(fetchTypedText())
-    if (simulatorRef.current) {
-      simulatorRef.current.focus()
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth',
-      })
+  const pauseTesting = (isPause: boolean) => {
+    if (isPause) {
+      setIsPause(true)
+      stop()
+      return
+    }
+    if (!isPause) {
+      setIsPause(false)
+      start()
     }
   }
 
@@ -113,13 +112,42 @@ export function SimulatorArea() {
       setWrongSymbolIndex(-1)
       setCorrectSymbolCount(correctSymbolCount + 1)
     }
-    console.log(correctSymbolCount, isReady)
+  }
+
+  const restartSimulator = () => {
+    reset()
+    setCorrectSymbolCount(0)
+    setWrongSymbolIndex(-1)
+    setCurrentView(SimulatorView.Instruction)
+    setIncorrectSymbolCount(0)
+    setIsInProgress(false)
+    setIsFinished(false)
+    dispatch(fetchTypedText())
+    if (simulatorRef.current) {
+      simulatorRef.current.focus()
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      })
+    }
   }
 
   return (
     <div className={css.root}>
       <h2 className={css.head}>Тренировка скорости печати</h2>
       <div
+        onBlur={(evt) => {
+          if (!evt.currentTarget.contains(evt.relatedTarget as Node | null)) {
+            pauseTesting(true)
+          }
+        }}
+        onFocus={() => {
+          if (isPause) {
+            console.log('onFocus')
+            pauseTesting(false)
+          }
+        }}
         ref={simulatorRef}
         className={css.textContainer}
         onKeyDown={(evt) => {
@@ -135,11 +163,9 @@ export function SimulatorArea() {
         }}
         tabIndex={0}
       >
+        {isPause && isReady && !isFinished ? <PausePopup /> : ''}
         {currentView === SimulatorView.Instruction ? (
-          <SimulatorPreview
-            onSpaceReadyButtonClick={setIsReady}
-            isReady={isReady}
-          />
+          <SimulatorPreview onReadyButtonClick={setIsReady} isReady={isReady} />
         ) : (
           <TypedText
             typedText={typedText}

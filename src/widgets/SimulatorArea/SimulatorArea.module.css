@@ -23,6 +23,8 @@
 }
 
 .textContainer {
+  position: relative;
+  box-sizing: border-box;
   margin-top: 10px;
   width: 1060px;
   padding: 30px 60px;

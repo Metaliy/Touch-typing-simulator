@@ -1,5 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
+import { EducationPage } from '@/pages/EducationPage'
 import { MainPage } from '@/pages/MainPage'
+import { StatisticsPage } from '@/pages/StatisticsPage'
 import { appLayout } from './appLayout'
 
 export const appRouter = createBrowserRouter([
@@ -11,6 +13,14 @@ export const appRouter = createBrowserRouter([
       {
         path: '/',
         element: <MainPage />,
+      },
+      {
+        path: '/education',
+        element: <EducationPage />,
+      },
+      {
+        path: '/statistics',
+        element: <StatisticsPage />,
       },
     ],
   },

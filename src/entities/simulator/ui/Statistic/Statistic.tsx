@@ -22,8 +22,7 @@ export function Statistic({
   const minutes = Math.floor(timer / 60)
   const time = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
   const accuracy = ((1 - incorrectSymbolsCount / symbolCount) * 100).toFixed(2)
-  const speed = Math.floor((correctSymbolsCount / timer / 60) * 10000)
-
+  const speed = Math.floor((correctSymbolsCount / timer) * 60)
   return (
     <div className={css.root}>
       {isFinished ? (
@@ -107,7 +106,11 @@ export function Statistic({
           <p className={css.statisticName}>Скорость печати</p>
         </div>
       </div>
-      <button className={css.retryButton} onClick={onRestartButtonClick}>
+      <button
+        disabled={timer === 0}
+        className={css.retryButton}
+        onClick={onRestartButtonClick}
+      >
         {isFinished ? 'Повторить тестирование' : 'Начать заново'}
       </button>
     </div>

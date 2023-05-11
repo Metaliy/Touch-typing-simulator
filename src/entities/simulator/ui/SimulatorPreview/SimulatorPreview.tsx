@@ -1,10 +1,10 @@
 import css from './SimulatorPreview.module.css'
 type Props = {
   isReady: boolean
-  onSpaceReadyButtonClick: CallableFunction
+  onReadyButtonClick: CallableFunction
 }
 
-export function SimulatorPreview({ isReady, onSpaceReadyButtonClick }: Props) {
+export function SimulatorPreview({ isReady, onReadyButtonClick }: Props) {
   return (
     <div className={css.root}>
       {!isReady ? (
@@ -16,7 +16,7 @@ export function SimulatorPreview({ isReady, onSpaceReadyButtonClick }: Props) {
           <button
             className={css.readyButton}
             onClick={(evt) => {
-              onSpaceReadyButtonClick(true)
+              onReadyButtonClick(true)
               const parentElement = evt.currentTarget.parentNode
                 ?.parentNode as HTMLElement
               if (parentElement && parentElement) {

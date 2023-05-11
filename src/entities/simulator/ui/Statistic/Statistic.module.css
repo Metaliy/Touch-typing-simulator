@@ -64,3 +64,8 @@
   font-size: 24px;
   cursor: pointer;
 }
+
+.retryButton:disabled {
+  background-color: #cee74177;
+  color: #03030363;
+}
