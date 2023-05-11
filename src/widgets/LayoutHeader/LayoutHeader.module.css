@@ -19,3 +19,8 @@
   font-size: 22px;
   padding: 0;
 }
+
+.navLink {
+  color: #fff;
+  text-decoration: none;
+}

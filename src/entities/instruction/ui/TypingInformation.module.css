@@ -1,0 +1,59 @@
+.root {
+  width: 1060px;
+  margin: 0 auto;
+}
+
+.head {
+  margin-top: 70px;
+  color: #CFE741;
+  font-size : 47px;
+  position: relative;
+  width: 1060px;
+}
+
+.head::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -26px;
+  height: 2px;
+  width: 1060px;
+  background-color: #CFE741;
+}
+
+.infoBlock {
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+}
+
+.infoBlockHead {
+  margin-bottom: 0;
+  font-size: 24px;
+  color: #CFE741;
+  position: relative;
+}
+
+.infoBlockHead::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  height: 2px;
+  width: 30%;
+  background-color: #CFE741;
+}
+
+.infoList {
+  margin-top: 35px;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.fingerPositionImg {
+  margin: 35px auto 0 auto;
+}
+
+.infoText {
+  margin-top: 35px;
+}
