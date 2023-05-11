@@ -6,12 +6,13 @@ export const fetchTypedText = createAsyncThunk<string>(
   async (_, { getState, requestId }) => {
     try {
       const api = baseApi
-      const { data } = await api.get<string>(
-        `/?type=meat-and-filler&paras=1&format=text`
+      const { data } = await api.get<{ text: string }>(
+        `/get?format=json&number=3`
       )
-      return data
+      console.log(JSON.stringify(data))
+      return data.text
     } catch (error) {
-      console.log('some error')
+      console.log(error, 'some error')
       throw error
     }
   }

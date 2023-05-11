@@ -15,9 +15,7 @@ import css from './SimulatorArea.module.css'
 export function SimulatorArea() {
   const dispatch = useAppDispatch()
 
-  const typedText = Array.from(
-    useAppSelector(selectTypedText).replace(/ {2}/g, ' ')
-  )
+  const typedText = Array.from(useAppSelector(selectTypedText))
   const [correctSymbolCount, setCorrectSymbolCount] = useState(0)
   const [wrongSymbolIndex, setWrongSymbolIndex] = useState(-1)
   const [currentView, setCurrentView] = useState(SimulatorView.Instruction)
@@ -143,8 +141,7 @@ export function SimulatorArea() {
           }
         }}
         onFocus={() => {
-          if (isPause) {
-            console.log('onFocus')
+          if (isPause && !isFinished) {
             pauseTesting(false)
           }
         }}
