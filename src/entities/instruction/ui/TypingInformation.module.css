@@ -1,5 +1,4 @@
 .root {
-  width: 1060px;
   margin: 0 auto;
 }
 
@@ -22,6 +21,7 @@
 }
 
 .infoBlock {
+  font-size: 24px;
   margin-top: 70px;
   display: flex;
   flex-direction: column;
@@ -46,8 +46,7 @@
 
 .infoList {
   margin-top: 35px;
-  list-style-type: none;
-  padding-left: 0;
+  padding-left: 22px;
 }
 
 .fingerPositionImg {
