@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { EducationPage } from '@/pages/EducationPage'
 import { MainPage } from '@/pages/MainPage'
-import { StatisticsPage } from '@/pages/StatisticsPage'
+import { ResultPage } from '@/pages/ResultPage'
 import { appLayout } from './appLayout'
 
 export const appRouter = createBrowserRouter([
@@ -20,7 +20,7 @@ export const appRouter = createBrowserRouter([
       },
       {
         path: '/statistics',
-        element: <StatisticsPage />,
+        element: <ResultPage />,
       },
     ],
   },

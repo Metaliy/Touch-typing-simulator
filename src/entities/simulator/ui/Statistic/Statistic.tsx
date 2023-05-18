@@ -2,27 +2,21 @@ import { type MouseEventHandler } from 'react'
 import css from './Statistic.module.css'
 
 type Props = {
-  timer: number
-  symbolCount: number
-  correctSymbolsCount: number
-  incorrectSymbolsCount: number
+  result: {
+    timer: number
+    accuracy: string
+    incorrectSymbolsCount: number
+    speed: number
+  }
   isFinished: boolean
   onRestartButtonClick: MouseEventHandler<HTMLButtonElement>
 }
 
-export function Statistic({
-  timer,
-  correctSymbolsCount,
-  incorrectSymbolsCount,
-  symbolCount,
-  isFinished,
-  onRestartButtonClick,
-}: Props) {
+export function Statistic({ result, isFinished, onRestartButtonClick }: Props) {
+  const { timer, accuracy, incorrectSymbolsCount, speed } = result
   const seconds = timer % 60
   const minutes = Math.floor(timer / 60)
   const time = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
-  const accuracy = ((1 - incorrectSymbolsCount / symbolCount) * 100).toFixed(2)
-  const speed = Math.floor((correctSymbolsCount / timer) * 60)
   return (
     <div className={css.root}>
       {isFinished ? (

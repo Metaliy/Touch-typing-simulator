@@ -1,0 +1,27 @@
+.root {
+  display: flex;
+}
+
+.resultlistItem {
+  position: relative;
+  width: 176.6px;
+  text-align: center;
+  background-color: #1E1E1E;
+  margin-top: 20px;
+  height: 80px;
+}
+
+.resultlistItem::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #CFE741;
+  bottom: 0;
+}
+
+.units {
+  font-size: 17px;
+  line-height: 14px;
+}

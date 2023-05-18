@@ -1,0 +1,90 @@
+.root {
+  width: 1060px;
+  margin: 0 auto;
+  font-size: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.head {
+  margin-top: 70px;
+  color: #CFE741;
+  font-size : 47px;
+  position: relative;
+  width: 1060px;
+}
+
+.head::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -26px;
+  height: 2px;
+  width: 1060px;
+  background-color: #CFE741;
+}
+
+.listHeaders {
+  position: relative;
+  margin-top: 70px;
+  display: flex;
+  background-color: #1E1E1E;
+  color: #fff;
+  padding: 20px 0;
+}
+
+.listHeaders::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  height: 2px;
+  width: 1060px;
+  background-color: #CFE741;
+  bottom: 0;
+}
+
+.listHeadersItem {
+  width: 176.6px;
+  text-align: center;
+}
+
+.resetButton {
+  margin: 20px auto 0 auto;
+  border: none;
+  background-color: #CFE741;
+  color: #030303;
+  width: 40%;
+  height: 68px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.resetButton:disabled {
+  background-color: #cee74177;
+  color: #03030363;
+}
+
+.emptyMessageContainer {
+  position: relative;
+  text-align: center;
+  background-color: #1E1E1E;
+  margin-top: 20px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.emptyMessageContainer::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #CFE741;
+  bottom: 0;
+}
+
+.emptyMessage {
+  font-size: 24px;
+}
