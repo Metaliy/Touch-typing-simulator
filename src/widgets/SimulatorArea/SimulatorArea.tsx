@@ -1,4 +1,6 @@
+import dayjs from 'dayjs'
 import { type RefObject, useEffect, useRef, useState } from 'react'
+import { addNewResult } from '@/entities/Results/model/slice'
 import {
   PausePopup,
   SimulatorPreview,
@@ -7,7 +9,7 @@ import {
 } from '@/entities/simulator'
 import { fetchTypedText } from '@/entities/simulator/api/typedTextApi'
 import { selectTypedText } from '@/entities/simulator/model/slice'
-import { SimulatorView } from '@/shared/lib/config'
+import { SimulatorView, TypingLanguare } from '@/shared/lib/config'
 import { useAppDispatch, useAppSelector } from '@/shared/model'
 import { useStopwatch } from '@/shared/model/hooks'
 import css from './SimulatorArea.module.css'
@@ -24,6 +26,14 @@ export function SimulatorArea() {
   const [isInProgress, setIsInProgress] = useState(false)
   const [isFinished, setIsFinished] = useState(false)
   const [isPause, setIsPause] = useState(false)
+  const [currentResult, setCurrentResult] = useState({
+    seconds: 0,
+    accuracy: '0',
+    incorrectSymbolsCount: 0,
+    speed: 0,
+    languare: '',
+    date: '',
+  })
   const statisticRef = useRef<HTMLDivElement>(null)
   const simulatorRef = useRef<HTMLDivElement>(null)
 
@@ -43,7 +53,29 @@ export function SimulatorArea() {
 
   useEffect(() => {
     dispatch(fetchTypedText())
-  }, [dispatch])
+  }, [])
+
+  useEffect(() => {
+    if (isFinished) {
+      setCurrentResult({
+        seconds: time,
+        accuracy: (
+          (1 - incorrectSymbolCount / correctSymbolCount) *
+          100
+        ).toFixed(2),
+        incorrectSymbolsCount: incorrectSymbolCount,
+        speed: Math.floor((correctSymbolCount / time) * 60),
+        languare: TypingLanguare.Russian,
+        date: dayjs().format('DD.MM.YYYY'),
+      })
+    }
+  }, [isFinished])
+
+  useEffect(() => {
+    if (isFinished) {
+      dispatch(addNewResult(currentResult))
+    }
+  }, [currentResult])
 
   const getClass = (
     currentSymbolIndex: number,
@@ -120,6 +152,7 @@ export function SimulatorArea() {
     setIncorrectSymbolCount(0)
     setIsInProgress(false)
     setIsFinished(false)
+    setIsPause(false)
     dispatch(fetchTypedText())
     if (simulatorRef.current) {
       simulatorRef.current.focus()
@@ -160,7 +193,12 @@ export function SimulatorArea() {
         }}
         tabIndex={0}
       >
-        {isPause && isReady && !isFinished ? <PausePopup /> : ''}
+        {(isPause && isReady && !isFinished && isInProgress) ||
+        (isPause && isReady && !isFinished) ? (
+          <PausePopup />
+        ) : (
+          ''
+        )}
         {currentView === SimulatorView.Instruction ? (
           <SimulatorPreview onReadyButtonClick={setIsReady} isReady={isReady} />
         ) : (
@@ -176,10 +214,12 @@ export function SimulatorArea() {
         Результаты
       </h2>
       <Statistic
-        timer={time}
-        correctSymbolsCount={correctSymbolCount}
-        incorrectSymbolsCount={incorrectSymbolCount}
-        symbolCount={typedText.length}
+        result={{
+          timer: currentResult.seconds,
+          accuracy: currentResult.accuracy,
+          incorrectSymbolsCount: currentResult.incorrectSymbolsCount,
+          speed: currentResult.speed,
+        }}
         isFinished={isFinished}
         onRestartButtonClick={restartSimulator}
       />

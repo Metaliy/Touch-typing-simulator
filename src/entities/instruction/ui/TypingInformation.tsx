@@ -62,7 +62,7 @@ export function TypingInformation() {
           className={css.fingerPositionImg}
           width={800}
           height={335}
-          src="/images/keyboard-2.png"
+          src="/images/keyboard.png"
           alt="Расположение пальцев"
         />
         <p className={css.infoText}>

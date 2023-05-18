@@ -21,3 +21,8 @@ export const enum SimulatorView {
   Instruction = 'Instruction',
   TypedText = 'TypedText',
 }
+
+export const enum TypingLanguare {
+  Russian = 'Русский',
+  English = 'English',
+}

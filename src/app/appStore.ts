@@ -10,14 +10,14 @@ import {
   persistStore,
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import { simulatorSlice } from '@/entities/simulator/model/slice'
+import { resultsSlice } from '@/entities/Results/model/slice'
 import { baseApi } from '@/shared/api'
 import { rootReducer } from './rootReducer'
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: [simulatorSlice.name],
+  whitelist: [resultsSlice.name],
 }
 
 export const createStore = (initialState = {}) =>
