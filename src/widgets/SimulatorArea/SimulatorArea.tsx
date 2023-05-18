@@ -17,7 +17,9 @@ import css from './SimulatorArea.module.css'
 export function SimulatorArea() {
   const dispatch = useAppDispatch()
 
-  const typedText = Array.from(useAppSelector(selectTypedText))
+  const typedText = Array.from(
+    useAppSelector(selectTypedText).replace(/—/g, '-')
+  )
   const [correctSymbolCount, setCorrectSymbolCount] = useState(0)
   const [wrongSymbolIndex, setWrongSymbolIndex] = useState(-1)
   const [currentView, setCurrentView] = useState(SimulatorView.Instruction)
